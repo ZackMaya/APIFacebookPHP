@@ -1,0 +1,20 @@
+
+         
+      <?php
+        //Si los datos son extraidos correctamente
+        include('conexion.php');
+          //Valida el id de usuario ya esta registrado
+    $selesql = "SELECT id_usuario FROM usuariofacebook WHERE id_usuario='${user.id}'";
+    $resultado= $con->query($selesql);
+
+      if($resultado->num_rows>0){
+        echo "Si busco";
+      }
+
+        $sqlinsert = "INSERT INTO usuariofacebook (id_usuario,email,birthday,ubication,edad,address,study,interesed,relaship,employe,gender) VALUES ('${user.id}',' ${user.email}','${user.birthday}','${user.location.name}','${user.age_range.min}','${user.address}','${user.education}','${user.interested_in}','${user.relationship_status}','${user.work}','${user.gender')";
+      
+        if(!mysqli_query($con,$sqlinsert)){
+        echo "error conexion";
+      }
+      $newrecord = "usuario guardado";
+    ?>  
