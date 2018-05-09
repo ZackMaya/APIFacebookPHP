@@ -67,6 +67,30 @@
         })
       }
 
+      //Funcion para mostrar lista de amigos
+      /* make the API call */
+      FB.api(
+          "/{user-id}/friends",
+          function (response) {
+            if (response && !response.error) {
+              /* handle the result */
+              buildProfile(response);
+            }
+          }
+      );
+
+      function creaAmigos(user) { 
+        FB.api('/me/friends', function(response) { 
+          if(response.data) { 
+            for(var i=0;iresponse.data.length;i++) { 
+              jQuery('#lista_amigos').append('div class="amigos"'+ 'img src="https://graph.facebook.com/'+response.data[i].id+'/picture"/'+ 'h3'+response.data[i].name+'/h3'+ '/div'); }
+               } else { 
+                console.log('Error al obtener amigos'); }
+
+                document.getElementById('user').innerHTML = profile; 
+              }); 
+      } 
+
       //funcion para mostrar el perfil facebook
       function buildProfile(user){
 
@@ -85,6 +109,7 @@
             <li class="list-group-item">Relacion: ${user.relationship_status}</li>
             <li class="list-group-item">Empleo: ${user.work}</li>
             <li class="list-group-item">Genero: ${user.gender}</li>
+            <li class="list-group-item">Dispositivos: ${user.devices}</li>
           </ul>
         `;
         document.getElementById('profile').innerHTML = profile;
